@@ -1,22 +1,10 @@
-import TaskCard from './components/TaskCard';
-
-const tasks = [
-  { id: 1, title: 'Finish assignment', priority: 'high' },
-  { id: 2, title: 'Read chapter 4', priority: 'low' },
-];
+import TaskList from './components/TaskList';
 
 function App() {
   return (
     <div>
-      {tasks.map((task) => (
-        <TaskCard
-          key={task.id}
-          title={task.title}
-          priority={task.priority}
-        >
-          <p>Due tomorrow</p>
-        </TaskCard>
-      ))}
+      <h1>My Task List</h1>
+      <TaskList />
     </div>
   );
 }
