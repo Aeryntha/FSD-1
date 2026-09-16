@@ -1,57 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function TaskList() {
-  const [tasks, setTasks] = useState([]);
-  const [input, setInput] = useState('');
+  const [tasks, setTasks] = useState(() => {
+    const saved = localStorage.getItem('tasks');
+    return saved ? JSON.parse(saved) : [];
+  });
 
-  const addTask = () => {
-    if (!input.trim()) return;
+  useEffect(() => {
+    console.log('Component mounted');
 
-    setTasks((prev) => [
-      ...prev,
-      {
-        id: Date.now(),
-        text: input,
-        done: false,
-      },
-    ]);
+    return () => console.log('Component unmounted');
+  }, []);
 
-    setInput('');
-  };
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
-  const toggleTask = (id) => {
-    setTasks((prev) =>
-      prev.map((t) =>
-        t.id === id ? { ...t, done: !t.done } : t
-      )
-    );
-  };
-
-  return (
-    <div>
-      <input
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Enter a task"
-      />
-
-      <button onClick={addTask}>Add</button>
-
-      <ul>
-        {tasks.map((t) => (
-          <li
-            key={t.id}
-            onClick={() => toggleTask(t.id)}
-            style={{
-              textDecoration: t.done ? 'line-through' : 'none',
-            }}
-          >
-            {t.text}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  return <div>{tasks.length} tasks saved locally</div>;
 }
 
 export default TaskList;
