@@ -70,7 +70,7 @@ function App() {
         />
 
         <Route
-          path="/week-5"
+          path="/week-5/*"
           element={<Week5 />}
         />
 
