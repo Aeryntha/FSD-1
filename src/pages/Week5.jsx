@@ -10,14 +10,9 @@ function Dashboard() {
   return (
     <div>
       <h2>Discord Dashboard</h2>
+      <p>Welcome to the Community Management Dashboard.</p>
 
-      <p>
-        Welcome to the Community Management Dashboard.
-      </p>
-
-      <Link to="/week-5/servers">
-        View Servers
-      </Link>
+      <Link to="servers">View Servers</Link>
     </div>
   );
 }
@@ -29,15 +24,11 @@ function Servers() {
 
       <ul>
         <li>
-          <Link to="/week-5/servers/101">
-            Study Hub
-          </Link>
+          <Link to="101">Study Hub</Link>
         </li>
 
         <li>
-          <Link to="/week-5/servers/102">
-            Gaming Community
-          </Link>
+          <Link to="102">Gaming Community</Link>
         </li>
       </ul>
     </div>
@@ -54,7 +45,7 @@ function ServerDetails() {
 
       <p>Discord Server ID: {id}</p>
 
-      <button onClick={() => navigate('/week-5/servers')}>
+      <button onClick={() => navigate('..')}>
         Back to Servers
       </button>
     </div>
@@ -67,32 +58,17 @@ function Week5() {
       <h1>Week 5 - React Router & Navigation</h1>
 
       <nav>
-        <Link to="/week-5">
-          Dashboard
-        </Link>
+        <Link to=".">Dashboard</Link>
         {' | '}
-        <Link to="/week-5/servers">
-          Servers
-        </Link>
+        <Link to="servers">Servers</Link>
       </nav>
 
       <hr />
 
       <Routes>
-        <Route
-          index
-          element={<Dashboard />}
-        />
-
-        <Route
-          path="servers"
-          element={<Servers />}
-        />
-
-        <Route
-          path="servers/:id"
-          element={<ServerDetails />}
-        />
+        <Route index element={<Dashboard />} />
+        <Route path="servers" element={<Servers />} />
+        <Route path="servers/:id" element={<ServerDetails />} />
       </Routes>
     </div>
   );
